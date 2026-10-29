@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the archived version below and the accompanying manuscript."
+title: "Analysis code for: Timing of the first vasopressor weaning attempt and 28-day mortality in patients with sepsis receiving norepinephrine"
+type: software
+authors:
+  - family-names: Li
+    given-names: Juan
+  - family-names: Hao
+    given-names: Xinyu
+  - family-names: Cheng
+    given-names: Yuan
+  - family-names: Li
+    given-names: Jiannan
+  - family-names: Wang
+    given-names: Henglin
+  - family-names: Cao
+    given-names: Fuyang
+    orcid: "https://orcid.org/0000-0002-3746-8489"
+version: 1.0.1
+doi: 10.5281/zenodo.23761805
+date-released: 2026-10-29
+license: MIT
+repository-code: "https://github.com/caofuyang/vasopressor-weaning-timing"
