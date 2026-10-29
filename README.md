@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23761805.svg)](https://doi.org/10.5281/zenodo.23761805)
+
 # Timing of the first vasopressor weaning attempt and mortality in sepsis
 
 Analysis code for a target trial emulation in MIMIC-IV with external validation in eICU-CRD.
