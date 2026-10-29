@@ -1,0 +1,17 @@
+# data (never commit patient-level records)
+data/
+*.csv
+*.duckdb
+*.parquet
+
+# generated outputs
+results/
+*.png
+*.pdf
+*.svg
+*.docx
+
+# python
+__pycache__/
+*.pyc
+.venv/
