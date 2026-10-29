@@ -39,23 +39,29 @@ code/
 
 ```bash
 # 1. Build the cohorts (DuckDB 1.5.x)
-duckdb tte.duckdb -c ".read sql/15_sepsis_filter.sql"   # optional: check the impact of the sepsis restriction
-duckdb tte.duckdb -c ".read sql/03_cohort_v2.sql"       # writes analytic_v2.csv
-duckdb eicu.duckdb -c ".read sql/07_eicu_cohort.sql"    # writes eicu_analytic.csv
+duckdb tte.duckdb  -c ".read sql/03_cohort_v2.sql"    # MIMIC-IV  -> analytic_v2.csv
+duckdb eicu.duckdb -c ".read sql/07_eicu_cohort.sql"  # eICU-CRD  -> eicu_analytic.csv
+# optional: check the impact of the ICD-based sepsis restriction
+duckdb tte.duckdb -c ".read sql/15_sepsis_filter.sql"
 
-# 2. Primary and secondary analyses
+# 2. Cohort flow counts (needed by Figure 1 and key_numbers.json)
+python code/01_flow_counts.py --mimic tte.duckdb --eicu eicu.duckdb
+
+# 3. Analyses (order matters: later steps read files written by earlier ones)
+python code/04_analysis.py        # primary estimate, sensitivity -> results/summary.txt
+python code/05_table1.py          # table1.csv
+python code/12_subgroups.py       # table3_subgroups.csv
+python code/08_eicu_analysis.py   # eicu_summary.txt
+python code/09_mimic_hosp.py      # mimic_hosp.txt
+
+# 4. Single source of truth, then outputs
 python code/20_key_numbers.py     # results/key_numbers.json
-python code/04_analysis.py        # primary estimate, sensitivity analyses
-python code/08_eicu_analysis.py   # external validation
-python code/09_mimic_hosp.py      # in-hospital mortality, MIMIC
-
-# 3. Tables, figures, consistency check
-python code/05_table1.py
-python code/12_subgroups.py
 python code/13_tables.py
 python code/10_figure2.py
 python code/11_figure1.py
-python code/21_verify.py          # must print "all consistent" before submission
+
+# 5. Consistency gate: must print "all consistent" before submission
+python code/21_verify.py
 ```
 
 Python 3.10; see `requirements.txt`.
